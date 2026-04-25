@@ -1,0 +1,177 @@
+@import url('https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap');
+@import "tailwindcss";
+
+@theme {
+  --font-sans: "Inter", "Helvetica Neue", Arial, sans-serif;
+  --font-display: "Inter", sans-serif;
+  
+  --color_cyber_blue: #38bdf8;
+  --color_cyber_red: #ef4444;
+  --color_cyber_navy: #020617;
+  --color_cyber_glass: rgba(255, 255, 255, 0.02);
+  --color_cyber_border: rgba(255, 255, 255, 0.1);
+}
+
+@layer base {
+  html, body {
+    @apply text-slate-200 font-sans;
+    background: linear-gradient(rgba(2, 6, 23, 0.4), rgba(2, 6, 23, 0.6)), url('https://images.unsplash.com/photo-1462331940025-496dfbfc7564?q=80&w=2022&auto=format&fit=crop');
+    background-size: cover;
+    background-position: center;
+    background-attachment: fixed;
+    background-repeat: no-repeat;
+    background-color: #020617;
+    min-height: 100vh;
+  }
+
+  ::selection {
+    background-color: var(--color_cyber_blue);
+    color: black;
+  }
+
+  h1, h2, h3, h4, h5, h6 {
+    @apply font-sans text-white tracking-tight;
+  }
+}
+
+@layer utilities {
+  .text_cyber_blue { color: var(--color_cyber_blue); }
+  .text_cyber_red { color: var(--color_cyber_red); }
+  .text_cyber_navy { color: var(--color_cyber_navy); }
+  .bg_cyber_blue { background-color: var(--color_cyber_blue); }
+  .bg_cyber_red { background-color: var(--color_cyber_red); }
+  .bg_cyber_navy { background-color: var(--color_cyber_navy); }
+  .bg_cyber_glass { background-color: var(--color_cyber_glass); }
+  .border_cyber_border { border-color: var(--color_cyber_border); }
+  .from_cyber_blue { 
+    --tw-gradient-from: #38bdf8 var(--tw-gradient-from-position); 
+    --tw-gradient-to: rgb(56 189 248 / 0) var(--tw-gradient-to-position); 
+    --tw-gradient-stops: var(--tw-gradient-from), var(--tw-gradient-to); 
+  }
+}
+
+@layer components {
+  .glass_card {
+    background-color: var(--color_cyber_glass);
+    border: 1px solid var(--color_cyber_border);
+    @apply backdrop-blur-sm rounded-xl transition-all duration-300 overflow-hidden break-words;
+  }
+
+  .inner_border {
+    @apply border border-white/5 rounded-lg bg-white/5 px-3 py-1.5;
+  }
+  
+  .tag {
+    @apply text-[10px] uppercase tracking-[1px] rounded font-bold;
+    background-color: rgba(56, 189, 248, 0.1);
+    color: var(--color_cyber_blue);
+  }
+  
+  .skill_pill {
+    background-color: rgba(255, 255, 255, 0.05);
+    border: 1px solid var(--color_cyber_border);
+    @apply text-[11px] px-3 py-1 rounded-full whitespace-nowrap;
+  }
+  
+  .cyber_button_primary {
+    background-color: rgb(241, 245, 249);
+    color: var(--color_cyber_navy);
+    @apply hover:bg-white px-6 py-2 rounded-lg font-semibold text-sm transition-all;
+  }
+
+  .cyber_button_outline {
+    border: 1px solid var(--color_cyber_border);
+    @apply text-slate-300 hover:bg-white/5 px-6 py-2 rounded-lg font-semibold text-sm transition-all;
+  }
+  
+  .status_dot {
+    background-color: var(--color_cyber_red);
+    @apply w-2 h-2 rounded-full shadow-[0_0_10px_#ef4444];
+  }
+}
+
+.bg_grid_white {
+  background-image: radial-gradient(rgba(255, 255, 255, 0.03) 1px, transparent 1px);
+  background-size: 40px 40px;
+}
+
+@keyframes dynamicGradient {
+  0% { background-position: 0% 50%; }
+  50% { background-position: 100% 50%; }
+  100% { background-position: 0% 50%; }
+}
+
+@layer utilities {
+  .text_dynamic_cyber {
+    background: linear-gradient(
+      90deg, 
+      #38bdf8, 
+      #ffffff, 
+      #38bdf8
+    );
+    background-size: 200% auto;
+    -webkit-background-clip: text;
+    background-clip: text;
+    -webkit-text-fill-color: transparent;
+    animation: dynamicGradient 15s linear infinite;
+    filter: drop-shadow(0 0 10px rgba(56, 189, 248, 0.3));
+  }
+
+  .scanline {
+    width: 100%;
+    height: 100px;
+    z-index: 99;
+    background: linear-gradient(0deg, rgba(0, 0, 0, 0) 0%, rgba(56, 189, 248, 0.1) 50%, rgba(0, 0, 0, 0) 100%);
+    opacity: 0.1;
+    position: absolute;
+    bottom: 100%;
+    animation: scanline 4s linear infinite;
+  }
+
+  .noise {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    z-index: 90;
+    background: url("https://grainy-gradients.vercel.app/noise.svg");
+    opacity: 0.1;
+    pointer-events: none;
+    mix-blend-mode: overlay;
+  }
+
+  .cyber-grid {
+    background-image: 
+      linear-gradient(rgba(56, 189, 248, 0.1) 1px, transparent 1px),
+      linear-gradient(90deg, rgba(56, 189, 248, 0.1) 1px, transparent 1px);
+    background-size: 50px 50px;
+    background-position: center;
+    transform: perspective(500px) rotateX(60deg) translateY(0);
+    position: absolute;
+    bottom: -100px;
+    left: -50%;
+    right: -50%;
+    height: 800px;
+    opacity: 0.3;
+    z-index: -1;
+  }
+}
+
+@keyframes scanline {
+  0% { bottom: 100%; }
+  100% { bottom: -100px; }
+}
+
+/* Custom Scrollbar */
+::-webkit-scrollbar {
+  width: 6px;
+}
+
+::-webkit-scrollbar-track {
+  background-color: var(--color_cyber_navy);
+}
+
+::-webkit-scrollbar-thumb {
+  @apply bg-white/10 rounded-full hover:bg-white/20;
+}
