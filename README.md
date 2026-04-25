@@ -1,20 +1,54 @@
-<div align="center">
-<img width="1200" height="475" alt="GHBanner" src="https://github.com/user-attachments/assets/0aa67016-6eaf-458a-adb2-6e31a0763ed6" />
-</div>
+# Yididya Shimelis | Portfolio
 
-# Run and deploy your AI Studio app
+A premium, high-end futuristic portfolio designed for a software engineering student specializing in cybersecurity. This application utilizes a "year 2099" aesthetic, featuring ultra-premium glassmorphism, holographic effects, and cinematic animations.
 
-This contains everything you need to run your app locally.
+## ✨ Features
 
-View your app in AI Studio: https://ai.studio/apps/2c4ae5f5-9065-4953-87f5-f7807efff8f3
+- **Cinematic Intro**: A high-impact AI system boot sequence powered by GSAP.
+- **Futuristic UI**: Dark theme with neon glow accents (blue/red) and deep glassmorphism.
+- **Responsive Design**: Fully optimized for desktop and mobile experiences.
+- **Project Showcase**: Detailed view of software engineering and cybersecurity projects.
+- **Cybersecurity Aesthetic**: Integrated scanlines, digital grids, and "machine-text" terminal effects.
 
-## Run Locally
+## 🛠️ Tech Stack
 
-**Prerequisites:**  Node.js
+- **Frontend**: React 18+ (JavaScript)
+- **Styling**: Tailwind CSS
+- **Animations**: GSAP & Framer Motion
+- **Icons**: Lucide React
+- **Build Tool**: Vite
 
+## 🚀 Getting Started
 
-1. Install dependencies:
-   `npm install`
-2. Set the `GEMINI_API_KEY` in [.env.local](.env.local) to your Gemini API key
-3. Run the app:
-   `npm run dev`
+### Prerequisites
+
+- Node.js (Latest LTS recommended)
+- npm or yarn
+
+### Installation
+
+1. Clone the repository:
+   ```bash
+   git clone <repository-url>
+   ```
+
+2. Install dependencies:
+   ```bash
+   npm install
+   ```
+
+3. Start the development server:
+   ```bash
+   npm run dev
+   ```
+
+## 📂 Project Structure
+
+- `src/components/`: Reusable React components (including the IntroAnimation).
+- `src/constants.js`: Data for projects, skills, and education history.
+- `src/App.jsx`: Main application routing and layout.
+- `src/index.css`: Global styles and futuristic CSS utilities.
+
+---
+
+Designed with precision by **Yididya Shimelis**.
