@@ -119,7 +119,7 @@
     background-clip: text;
     -webkit-text-fill-color: transparent;
     animation: dynamicGradient 15s linear infinite;
-    filter: drop-shadow(0 0 10px rgba(56, 189, 248, 0.3));
+    filter: drop-shadow(0 0 6px rgba(56, 189, 248, 0.2));
   }
 
   .scanline {

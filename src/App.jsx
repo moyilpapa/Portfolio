@@ -41,24 +41,24 @@ import { Stars, Float as FloatDrei, PerspectiveCamera } from '@react-three/drei'
 
 const AmbientBackground = () => {
   return (
-    <div className="fixed inset-0 z-[-1] pointer-events-none opacity-40">
+    <div className="fixed inset-0 z-[-1] pointer-events-none opacity-15">
       <Canvas camera={{ position: [0, 0, 10] }}>
         <PerspectiveCamera makeDefault position={[0, 0, 10]} fov={50} />
-        <ambientLight intensity={0.5} />
-        <Stars radius={100} depth={50} count={3000} factor={4} saturation={0} fade speed={0.5} />
+        <ambientLight intensity={0.1} />
+        <Stars radius={100} depth={50} count={2000} factor={2} saturation={0} fade speed={0.3} />
         
         {/* Subtle floating tech shapes */}
-        {[...Array(5)].map((_, i) => (
-          <FloatDrei key={i} speed={1} rotationIntensity={1} floatIntensity={1} position={[(i - 2) * 5, (i % 2 === 0 ? 3 : -3), 0]}>
+        {[...Array(6)].map((_, i) => (
+          <FloatDrei key={i} speed={1} rotationIntensity={1} floatIntensity={1} position={[(i - 2.5) * 4, (i % 2 === 0 ? 3 : -3), 0]}>
             <mesh>
-              <icosahedronGeometry args={[1, 1]} />
+              <icosahedronGeometry args={[0.8, 1]} />
               <meshStandardMaterial 
-                color="#14f1ff" 
-                emissive="#38bdf8" 
-                emissiveIntensity={1.5} 
+                color={i % 2 === 0 ? "#14f1ff" : "#fb923c"} 
+                emissive={i % 2 === 0 ? "#38bdf8" : "#f97316"} 
+                emissiveIntensity={1.2} 
                 wireframe 
                 transparent 
-                opacity={0.08} 
+                opacity={0.06} 
               />
             </mesh>
           </FloatDrei>
@@ -197,11 +197,17 @@ const NavigationDock = () => {
 const HomePage = () => (
   <PageTransition>
     <div className="glass_card p-8 sm:p-12 lg:p-20 h-full flex flex-col justify-center relative overflow-hidden">
-      <div className="absolute top-0 right-0 w-[500px] h-[500px] blur-[150px] rounded-full pointer-events-none" style={{ backgroundColor: 'rgba(56, 189, 248, 0.08)' }} />
+      <div className="absolute top-0 right-0 w-[400px] h-[400px] blur-[120px] rounded-full pointer-events-none" style={{ backgroundColor: 'rgba(56, 189, 248, 0.03)' }} />
+      <div className="absolute bottom-0 left-0 w-[350px] h-[350px] blur-[100px] rounded-full pointer-events-none" style={{ backgroundColor: 'rgba(251, 146, 60, 0.03)' }} />
       
       <div className="grid lg:grid-cols-[1fr_auto] items-center gap-10 lg:gap-20 relative z-20">
         {/* Text Section (Visual Precedence on Left) */}
-        <div className="text-center lg:text-left order-2 lg:order-1">
+        <motion.div 
+          initial={{ opacity: 0, x: -20 }}
+          animate={{ opacity: 1, x: 0 }}
+          transition={{ duration: 1.2, ease: "easeOut", delay: 0.2 }}
+          className="text-center lg:text-left order-2 lg:order-1"
+        >
           <h2 className="text-4xl md:text-5xl lg:text-7xl font-bold mb-10 leading-[1.05] tracking-tight">
             <span className="text_dynamic_cyber">Building Resilient</span> <br/> 
             <span className="text-transparent bg-clip-text bg-gradient-to-r from_cyber_blue to-white font-light italic">Digital Systems</span>
@@ -212,11 +218,15 @@ const HomePage = () => (
             Third-year software engineering student at ASTU specializing in 
             cybersecurity and efficient system architecture.
           </p>
-
-        </div>
+        </motion.div>
 
         {/* Photo Section (Balanced on Right) */}
-        <div className="flex justify-center lg:justify-end order-1 lg:order-2">
+        <motion.div 
+          initial={{ opacity: 0, scale: 0.95 }}
+          animate={{ opacity: 1, scale: 1 }}
+          transition={{ duration: 1.5, ease: "easeOut", delay: 0.4 }}
+          className="flex justify-center lg:justify-end order-1 lg:order-2"
+        >
           <div className="relative w-48 h-48 sm:w-64 sm:h-64 lg:w-72 lg:h-72 xl:w-80 xl:h-80 group">
             <div className="absolute -top-3 -left-3 w-8 h-8 border-t-2 border-l-2 border-blue-500/40" />
             <div className="absolute -bottom-3 -right-3 w-8 h-8 border-b-2 border-r-2 border-blue-500/40" />
@@ -237,7 +247,7 @@ const HomePage = () => (
               <div className="absolute inset-0 bg-blue-500/5 mix-blend-overlay pointer-events-none" />
             </div>
           </div>
-        </div>
+        </motion.div>
       </div>
     </div>
   </PageTransition>
@@ -506,11 +516,26 @@ const ResumePage = () => (
   </PageTransition>
 );
 
+const ScrollToTop = () => {
+  const { pathname } = useLocation();
+
+  useEffect(() => {
+    window.scrollTo({
+      top: 0,
+      left: 0,
+      behavior: 'smooth'
+    });
+  }, [pathname]);
+
+  return null;
+};
+
 export default function App() {
   const [isIntroComplete, setIsIntroComplete] = useState(false);
 
   return (
     <Router>
+      <ScrollToTop />
       <div className="relative min-h-screen flex flex-col scroll-smooth overflow-x-hidden bg-transparent">
         <AmbientBackground />
         <AnimatePresence>
@@ -519,7 +544,12 @@ export default function App() {
           )}
         </AnimatePresence>
         
-        <div className={`max-w-7xl mx-auto w-full px-4 sm:px-6 py-4 sm:py-8 flex-grow flex flex-col relative transition-opacity duration-1000 ${isIntroComplete ? 'opacity-100' : 'opacity-0'}`}>
+        <motion.div 
+          initial={{ opacity: 0 }}
+          animate={{ opacity: isIntroComplete ? 1 : 0 }}
+          transition={{ duration: 1.5, ease: "easeInOut" }}
+          className="max-w-7xl mx-auto w-full px-4 sm:px-6 py-4 sm:py-8 flex-grow flex flex-col relative"
+        >
           <Header />
 
           <main className="relative flex-grow w-full md:min-h-[600px]">
@@ -537,7 +567,7 @@ export default function App() {
           </main>
           
           <NavigationDock />
-        </div>
+        </motion.div>
 
         <footer className="max-w-7xl mx-auto w-full px-4 sm:px-6 mb-10 opacity-40">
           <div className="glass_card flex flex-col sm:flex-row justify-between items-center py-4 px-6 sm:px-8 gap-4 text-center">
