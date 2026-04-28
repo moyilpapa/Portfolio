@@ -5,6 +5,7 @@
 
 import React, { useState, useEffect, useCallback, useRef } from 'react';
 import { BrowserRouter as Router, Routes, Route, Link, useLocation, useParams, Navigate, NavLink } from 'react-router-dom';
+import profilePic from './assets/profile.png';
 import { motion, AnimatePresence } from 'motion/react';
 import { 
   Github, 
@@ -234,14 +235,11 @@ const HomePage = () => (
             
             <div className="relative w-full h-full rounded-2xl overflow-hidden border border-white/10 glass_card p-1 bg-white/[0.01]">
               <img 
-                src="/profile.png" 
+                src={profilePic} 
                 alt="Yididya Shimelis"
                 className="w-full h-full object-cover rounded-xl filter contrast-110 brightness-100 transition-all duration-700"
                 referrerPolicy="no-referrer"
                 style={{ filter: 'contrast(1.1) brightness(1.05)' }}
-                onError={(e) => {
-                  e.target.src = "https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?auto=format&fit=crop&q=80&w=800";
-                }}
               />
               <div className="absolute inset-0 bg-gradient-to-b from-blue-500/10 to-transparent h-px w-full top-0 animate-[scan_4s_linear_infinite] pointer-events-none opacity-30" />
               <div className="absolute inset-0 bg-blue-500/5 mix-blend-overlay pointer-events-none" />
